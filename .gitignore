@@ -28,3 +28,4 @@ GEMINI.md
 opencode.json
 .vscode/
 data/**
+!.gitignore
