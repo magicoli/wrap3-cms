@@ -1,28 +1,15 @@
 # Web Reel Automated Publishing: it's a W.R.A.P.
 
-![Version 5.5.O-dev](https://badgen.net/badge/Version/5.5.O-dev/blue)
-![Stable 3.1.1](https://badgen.net/badge/Stable/3.1.1/green)
-![Requires PHP 7.4](https://badgen.net/badge/PHP/5.7/7884bf)
-![License AGPLv3](https://badgen.net/badge/License/AGPLv3/552b55)
+This is the legacy version of the CMS code (3.1.1). It will not receive any further updates. All new development will take place in separate projects within the 6.x branch:
 
-WARNING: This is a development branch, it is likely to contain bugs and should
-not be used in production environment. Use latest stable version in master 
-brtanch instead:
-https://github.com/magicoli/wrap/
+- **[magicoli/wrap-app](https://github.com/magicoli/wrap-app)**: a brand-new, modern application that covers not only the features of the legacy CMS but also a wide range of new capabilities.
+- **[magicoli/wrap-tools](https://github.com/magicoli/wrap-tools)**: command-line tools only.
 
-# About Migration
-
-This is a very old application. The git repository already dates back to 2013,
-but the project itself started in the early 2000. As such, it contains a huge
-lot of outdated code an bad practices and became very difficult to maintain.
-
-There were already several attempts to rewrite it from scratch (v4.x and 5.x), 
-but as it is used daily, it has always been difficult to achieve a state where
-new version could be installed seamlessly in old websites.
-
-Version 5.5 is a new approach: restart from the latest stable version (3.1.1)
-and implemment the new features one by one, while maintaining an absolute backwards
-compatibility.
+![Version](https://img.shields.io/badge/Version-3.5.0-lightgrey)
+![Stable](https://img.shields.io/badge/Stable-3.1.1-green)
+![Requires](https://img.shields.io/badge/PHP-8.3-7884bf)
+![License](https://img.shields.io/badge/License-AGPLv3-552b55)
+[![Donate](https://img.shields.io/badge/-Donate-yellow)](https://magiiic.org/donate/)
 
 ## Description
 
@@ -41,12 +28,12 @@ It is poorly documented, but it works now with PHP7 (and probably 8).
 
 ## Installation
 
-* VERY IMPORTANT: **Put this project outside your web directory**. It contains
+- VERY IMPORTANT: **Put this project outside your web directory**. It contains
   unprotected scripts and tools aimed to alter your disk content
-* bin/ tools are not needed for web publishing. They are used to manipulate
+- bin/ tools are not needed for web publishing. They are used to manipulate
   video files. If you only need to publish ready to use files, you can safely
   (and should) remove bin/ folder
-* In your apache config, add alias, rules and wrap.php as DirectoryIndex:
+- In your apache config, add alias, rules and wrap.php as DirectoryIndex:
   ```
   Alias /wrap/ /opt/wrap/
   DirectoryIndex index.php index.html /wrap/wrap.php
@@ -62,7 +49,7 @@ It is poorly documented, but it works now with PHP7 (and probably 8).
     AllowOverride All
   </Directory>
   ```
-* you can place wrap.css and wrap.html in your web root folder to customize layout
-* use themes/bootstrap/page-template.html as base for wrap.html and be sure to
+- you can place wrap.css and wrap.html in your web root folder to customize layout
+- use themes/bootstrap/page-template.html as base for wrap.html and be sure to
   include all needed shortcodes
-* More on this later...
+- More on this later...
