@@ -1,12 +1,9 @@
-# W.R.A.P. 3 CMS (wrap3-cms-caddy package): directives serving the CMS as
-# Apache does, the CMS files at /wrap/ and wrap.php for the folders of the
-# site without an index file. Imported by a site block with the site root as
-# argument, see the default site, /etc/caddy/sites/wrap3-cms.caddyfile.
-#
-# The CMS reads the site folders from DOCUMENT_ROOT, and builds its URLs from
-# SCRIPT_NAME (/wrap/wrap.php). PHP-FPM through the php-fpm.sock alternative.
+# W.R.A.P. 3 CMS engine configuration.
 
-# Folders are addressed with a trailing slash, as Apache redirects them
+# Provides /usr/share/wrap3-cms/ engine through /wrap/ alias.
+# Import in a site block with the site root as argument, e.g.
+#   import /etc/caddy/sites/wrap3-cms.caddyfile /var/lib/wrap3/www
+
 @wrap_folder_noslash {
 	file {path}/
 	not path */
