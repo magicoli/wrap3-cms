@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 3.5.6
 
 - new packages also attached to the GitHub releases, to install without the apt repository
 - update Caddy default site at wrap3.localhost instead of http://wrap3.localhost
