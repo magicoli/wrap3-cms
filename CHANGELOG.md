@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.5.4
+
+- new example sites: /etc/apache2/sites-available/wrap3-cms.conf, /etc/caddy/sites/wrap3-cms.caddyfile.example
+- update Apache conf enabled on install
+- update Caddy snippet moved to /etc/caddy/snippets/wrap3-cms.caddyfile
+
 ## 3.5.3
 
 - fix wrap3-cms package requires PHP 8.2 or later (php-cli when no PHP is installed), without imposing a web server
