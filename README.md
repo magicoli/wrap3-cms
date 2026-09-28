@@ -38,6 +38,8 @@ echo "deb [signed-by=/usr/share/keyrings/magiiic-packaging.gpg] https://apt.magi
 sudo apt update && sudo apt install wrap3-cms-apache    # or wrap3-cms-caddy
 ```
 
+Or without the repository, and without automatic updates: download `wrap3-cms` and the web server package from the [latest release](https://github.com/magicoli/wrap3-cms/releases/latest), then install them together, e.g. `sudo apt install ./wrap3-cms_*.deb ./wrap3-cms-caddy_*.deb`.
+
 The CMS is installed in `/usr/share/wrap3-cms`, and serves the folders of a site without an index file. The install also sets up a default site: put the content in `/var/lib/wrap3/www`, and set the real domain in the site config, which answers at `wrap3.localhost` until then (on the server itself only). The CMS keeps its cache next to the site root, in `/var/lib/wrap3/cache`.
 
 With Apache (`wrap3-cms-apache`), the CMS is served at `/wrap/` by the `wrap3-cms` conf, and the default site is `/etc/apache2/sites-available/wrap3-cms.conf`, both enabled on install. Once the domain is set:
