@@ -29,3 +29,5 @@ opencode.json
 .vscode/
 data/**
 !.gitignore
+build/
+dist/

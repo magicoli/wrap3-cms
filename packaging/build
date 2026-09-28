@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Prepares the files of the wrap3-cms package in build/wrap3-cms: the CMS as
+# committed (HEAD), without what it does not distribute (.distignore), with its
+# runtime dependencies. The working copy is left untouched.
+# Run by apt-package from the repository root.
+
+set -e
+
+BUILD=build/wrap3-cms
+
+rm -rf "$BUILD"
+mkdir -p "$BUILD"
+git archive HEAD | tar -x -C "$BUILD"
+
+while read -r entry; do
+    [[ -z "$entry" ]] || rm -rf "${BUILD:?}/${entry%/}"
+done <.distignore
+
+composer install --no-dev --no-interaction --quiet --optimize-autoloader --working-dir="$BUILD/engine"
+
+# Installed read-only for everyone but root, whatever the local umask
+chmod -R go-w "$BUILD"
