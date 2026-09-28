@@ -1,9 +1,10 @@
 #!/bin/sh
-# postinst of wrap3-cms-apache: enables the wrap3-cms conf the Debian way, so a
-# conf disabled by the admin stays disabled on upgrades.
+# postinst of wrap3-cms-apache: enables the wrap3-cms conf and default site the
+# Debian way, so what the admin disabled stays disabled on upgrades.
 set -e
 
 if [ "$1" = "configure" ] && [ -e /usr/share/apache2/apache2-maintscript-helper ]; then
     . /usr/share/apache2/apache2-maintscript-helper
     apache2_invoke enconf wrap3-cms
+    apache2_invoke ensite wrap3-cms
 fi

@@ -1,6 +1,35 @@
 #!/bin/sh
-# Maintainer script of wrap3-cms-caddy (preinst, postinst, postrm): up to 3.5.3,
-# the snippet was /etc/caddy/wrap3-cms.caddyfile, now in /etc/caddy/snippets/.
+# Maintainer script of wrap3-cms-caddy (preinst, postinst, postrm).
 set -e
 
+# Up to 3.5.3, the snippet was /etc/caddy/wrap3-cms.caddyfile, now in
+# /etc/caddy/snippets/
 dpkg-maintscript-helper rm_conffile /etc/caddy/wrap3-cms.caddyfile 3.5.4~ -- "$@"
+
+# Applies the config to a running Caddy (reload or restart), which keeps the
+# former one on error
+update_caddy() {
+    if [ -d /run/systemd/system ] && systemctl -q is-active caddy; then
+        systemctl "$1" caddy ||
+            echo "wrap3-cms-caddy: Caddy $1 failed, see journalctl -u caddy" >&2
+    fi
+}
+
+case "$DPKG_MAINTSCRIPT_NAME $1" in
+    "postinst configure")
+        if ! grep -qs '^[[:space:]]*import .*sites/' /etc/caddy/Caddyfile; then
+            echo "wrap3-cms-caddy: to load the site, add to /etc/caddy/Caddyfile: import sites/*.caddyfile" >&2
+        fi
+        # Caddy reaches PHP-FPM through its socket, owned by the www-data group,
+        # which a restart applies
+        if id caddy >/dev/null 2>&1 && ! id -nG caddy | grep -qw www-data; then
+            usermod -aG www-data caddy
+            update_caddy restart
+        else
+            update_caddy reload
+        fi
+        ;;
+    "postrm purge")
+        update_caddy reload
+        ;;
+esac

@@ -1,10 +1,11 @@
 #!/bin/sh
-# postrm of wrap3-cms-apache: disables the wrap3-cms conf on removal.
+# postrm of wrap3-cms-apache: disables the wrap3-cms conf and site on removal.
 set -e
 
 if [ "$1" = "remove" ] || [ "$1" = "purge" ]; then
     if [ -e /usr/share/apache2/apache2-maintscript-helper ]; then
         . /usr/share/apache2/apache2-maintscript-helper
+        apache2_invoke dissite wrap3-cms
         apache2_invoke disconf wrap3-cms
     fi
 fi

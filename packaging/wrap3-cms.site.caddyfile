@@ -1,8 +1,10 @@
-# Example site serving the W.R.A.P. 3 CMS (wrap3-cms-caddy package): copy it to
-# a .caddyfile imported by the main Caddyfile (e.g. with import sites/*.caddyfile),
-# with the real domain and site root.
-example.com {
-	root * /var/www/example.com
-	import /etc/caddy/snippets/wrap3-cms.caddyfile /var/www/example.com
+# Default site of the W.R.A.P. 3 CMS (wrap3-cms-caddy package), loaded when the
+# main Caddyfile imports this folder (import sites/*.caddyfile). Replace
+# http://wrap3.localhost with the real domain, HTTPS comes with it
+# (wrap3.localhost only answers on the server itself). The content goes in
+# /var/lib/wrap3/www.
+http://wrap3.localhost {
+	root * /var/lib/wrap3/www
+	import /etc/caddy/snippets/wrap3-cms.caddyfile /var/lib/wrap3/www
 	file_server
 }

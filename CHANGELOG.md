@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- new default site, ready to use once the domain is set: content in /var/lib/wrap3/www, cache in /var/lib/wrap3/cache
+- update Apache default site /etc/apache2/sites-available/wrap3-cms.conf enabled on install
+- update Caddy default site /etc/caddy/sites/wrap3-cms.caddyfile, loaded when the Caddyfile imports sites/*.caddyfile
+- fix Caddy user added to the www-data group on install, to reach PHP-FPM
+
 ## 3.5.4
 
 - new example sites: /etc/apache2/sites-available/wrap3-cms.conf, /etc/caddy/sites/wrap3-cms.caddyfile.example

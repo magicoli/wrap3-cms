@@ -1,0 +1,11 @@
+#!/bin/sh
+# postinst of wrap3-cms: creates the default site, served by the site configs
+# of wrap3-cms-apache and wrap3-cms-caddy, and its cache. Left as is once
+# created.
+set -e
+
+if [ "$1" = "configure" ]; then
+    [ -d /var/lib/wrap3/www ] || install -d -m 755 /var/lib/wrap3/www
+    # The CMS caches its pages next to the site root
+    [ -d /var/lib/wrap3/cache ] || install -d -o www-data -g www-data -m 750 /var/lib/wrap3/cache
+fi

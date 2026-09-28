@@ -38,15 +38,17 @@ echo "deb [signed-by=/usr/share/keyrings/magiiic-packaging.gpg] https://apt.magi
 sudo apt update && sudo apt install wrap3-cms-apache    # or wrap3-cms-caddy
 ```
 
-The CMS is installed in `/usr/share/wrap3-cms`, and serves the folders of a site without an index file.
+The CMS is installed in `/usr/share/wrap3-cms`, and serves the folders of a site without an index file. The install also sets up a default site: put the content in `/var/lib/wrap3/www`, and set the real domain in the site config, which answers at `wrap3.localhost` until then (on the server itself only). The CMS keeps its cache next to the site root, in `/var/lib/wrap3/cache`.
 
-With Apache (`wrap3-cms-apache`), the CMS is served at `/wrap/` by the `wrap3-cms` conf, enabled on install. A site using it sets `DirectoryIndex index.html index.php /wrap/wrap.php`: adapt the example site `/etc/apache2/sites-available/wrap3-cms.conf` (domain, document root), then enable it:
+With Apache (`wrap3-cms-apache`), the CMS is served at `/wrap/` by the `wrap3-cms` conf, and the default site is `/etc/apache2/sites-available/wrap3-cms.conf`, both enabled on install. Once the domain is set:
 
 ```bash
-sudo a2ensite wrap3-cms && sudo systemctl reload apache2
+sudo systemctl reload apache2
 ```
 
-With Caddy (`wrap3-cms-caddy`), the snippet `/etc/caddy/snippets/wrap3-cms.caddyfile` is imported by a site block, with the site root as argument. Copy the example site `/etc/caddy/sites/wrap3-cms.caddyfile.example` to a `.caddyfile` loaded by the main Caddyfile (e.g. with `import sites/*.caddyfile`), set the domain and site root, then reload Caddy:
+Other sites use the CMS with `DirectoryIndex index.html index.php /wrap/wrap.php`, as the default one.
+
+With Caddy (`wrap3-cms-caddy`), the default site is `/etc/caddy/sites/wrap3-cms.caddyfile`, loaded when the main Caddyfile imports that folder (`import sites/*.caddyfile`). Replace `http://wrap3.localhost` with the real domain, HTTPS comes with it, then reload Caddy (`sudo systemctl reload caddy`). Other sites import the snippet `/etc/caddy/snippets/wrap3-cms.caddyfile`, with the site root as argument:
 
 ```
 example.com {

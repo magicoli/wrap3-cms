@@ -1,6 +1,6 @@
 # Apache setup of the W.R.A.P. 3 CMS, built by apt-package (apt-repo): the
-# wrap3-cms conf serving the CMS at /wrap/, enabled on install, and an example
-# site (a2ensite wrap3-cms once adapted).
+# wrap3-cms conf serving the CMS at /wrap/ and the default site, both enabled
+# on install.
 name: wrap3-cms-apache
 arch: all
 platform: linux
