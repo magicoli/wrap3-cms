@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.5.0 transitional
+
+- new Debian package wrap3-cms, installed from the Magiiic apt repository, with an Apache config serving it at /wrap/
+- new playlist sections (files beginning with #)
+- update 3.1.1 CMS moved to legacy/, next to the engine/ foundation of the 6.x migration, both loaded by wrap.php
+- update dependencies installed with composer instead of committed, PHP 8.2 or later required
+- fix PHP 8 deprecations and notices
+- known issue: MP4 metadata features expect AtomicParsley and mp4info in /usr/local/bin
+
 ## 3.1.0
 * front-end:
   - updated playable formats
