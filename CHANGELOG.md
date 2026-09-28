@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.5.2
+
+- new packages wrap3-cms-apache and wrap3-cms-caddy, with the web server config and the matching PHP runtime
+- update wrap3-cms package: the CMS only, no web server config or PHP runtime imposed
+
 ## 3.5.1
 
 - new Caddy config for the CMS, /etc/caddy/wrap3-cms.caddyfile, imported in a site block with the site root
