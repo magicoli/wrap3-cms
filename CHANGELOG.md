@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.5.3
+
+- fix wrap3-cms package requires PHP 8.2 or later (php-cli when no PHP is installed), without imposing a web server
+
 ## 3.5.2
 
 - new packages wrap3-cms-apache and wrap3-cms-caddy, with the web server config and the matching PHP runtime
