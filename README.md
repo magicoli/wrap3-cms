@@ -48,7 +48,7 @@ sudo systemctl reload apache2
 
 Other sites use the CMS with `DirectoryIndex index.html index.php /wrap/wrap.php`, as the default one.
 
-With Caddy (`wrap3-cms-caddy`), the default site is `/etc/caddy/sites/wrap3-cms.caddyfile`, loaded when the main Caddyfile imports that folder (`import sites/*.caddyfile`). Replace `http://wrap3.localhost` with the real domain, HTTPS comes with it, then reload Caddy (`sudo systemctl reload caddy`). Other sites import the snippet `/etc/caddy/snippets/wrap3-cms.caddyfile`, with the site root as argument:
+With Caddy (`wrap3-cms-caddy`), the default site is `/etc/caddy/sites/wrap3-cms.caddyfile`, loaded when the main Caddyfile imports that folder (`import sites/*.caddyfile`). Replace `wrap3.localhost` with the real domain, then reload Caddy (`sudo systemctl reload caddy`). Other sites import the snippet `/etc/caddy/snippets/wrap3-cms.caddyfile`, with the site root as argument:
 
 ```
 example.com {

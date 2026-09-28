@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- update Caddy default site at wrap3.localhost instead of http://wrap3.localhost
+- update comments of the web server configs
+
 ## 3.5.5
 
 - new default site, ready to use once the domain is set: content in /var/lib/wrap3/www, cache in /var/lib/wrap3/cache

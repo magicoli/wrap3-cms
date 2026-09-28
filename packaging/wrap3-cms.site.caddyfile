@@ -1,4 +1,4 @@
-# Default Apache2 site for the W.R.A.P. 3 CMS.
+# Default Caddy site for the W.R.A.P. 3 CMS.
 
 # This is the base for the actual content structure, the CMS
 # engine is provided from /usr/share/wrap3-cms/
