@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 3.5.5
 
 - new default site, ready to use once the domain is set: content in /var/lib/wrap3/www, cache in /var/lib/wrap3/cache
 - update Apache default site /etc/apache2/sites-available/wrap3-cms.conf enabled on install
