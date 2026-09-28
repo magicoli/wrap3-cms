@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.5.1
+
+- new Caddy config for the CMS, /etc/caddy/wrap3-cms.caddyfile, imported in a site block with the site root
+
 ## 3.5.0 transitional
 
 - new Debian package wrap3-cms, installed from the Magiiic apt repository, with an Apache config serving it at /wrap/
