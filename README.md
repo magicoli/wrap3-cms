@@ -38,16 +38,28 @@ echo "deb [signed-by=/usr/share/keyrings/magiiic-packaging.gpg] https://apt.magi
 sudo apt update && sudo apt install wrap3-cms
 ```
 
-The CMS is installed in `/usr/share/wrap3-cms`. Serve it at `/wrap/`:
+The CMS is installed in `/usr/share/wrap3-cms`, and serves the folders of a site without an index file.
+
+With Apache, enable it at `/wrap/`:
 
 ```bash
 sudo a2enconf wrap3-cms && sudo systemctl reload apache2
 ```
 
-Then, in the Apache config of each site using it:
+Then, in the config of each site using it:
 
 ```
 DirectoryIndex index.html index.php /wrap/wrap.php
+```
+
+With Caddy and PHP-FPM, import `/etc/caddy/wrap3-cms.caddyfile` in the site block, with the site root as argument:
+
+```
+example.com {
+    root * /var/www/example.com
+    import /etc/caddy/wrap3-cms.caddyfile /var/www/example.com
+    file_server
+}
 ```
 
 - you can place wrap.css and wrap.html in your web root folder to customize layout
