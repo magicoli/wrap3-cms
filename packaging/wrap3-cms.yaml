@@ -1,5 +1,7 @@
 # W.R.A.P. 3 CMS, built by apt-package (apt-repo) from build/wrap3-cms,
 # prepared by packaging/build. ${VERSION} comes from the git tag.
+# The web server setup is in its own package: wrap3-cms-apache or
+# wrap3-cms-caddy, which bring the matching PHP runtime (8.2+).
 name: wrap3-cms
 arch: all
 platform: linux
@@ -12,9 +14,9 @@ description: W.R.A.P. 3 CMS, media galleries published from folders (transitiona
 homepage: https://github.com/magicoli/wrap3-cms
 license: AGPL-3.0-or-later
 
-depends:
-  # The locked dependencies need PHP 8.2+
-  - php (>= 2:8.2)
+suggests:
+  - wrap3-cms-apache
+  - wrap3-cms-caddy
 # Known issue: legacy/inc/functions.php runs /usr/local/bin/AtomicParsley and
 # /usr/local/bin/mp4info, not provided here (Debian installs AtomicParsley in
 # /usr/bin): the features using them fail where they are missing.
@@ -23,15 +25,3 @@ contents:
   - src: build/wrap3-cms
     dst: /usr/share/wrap3-cms
     type: tree
-  # Apache: a2enconf wrap3-cms, then DirectoryIndex ... /wrap/wrap.php in sites
-  # Caddy: import in a site block with the site root, see the file
-  - src: packaging/wrap3-cms.caddyfile
-    dst: /etc/caddy/wrap3-cms.caddyfile
-    type: config
-    file_info:
-      mode: 0644
-  - src: packaging/wrap3-cms.apache.conf
-    dst: /etc/apache2/conf-available/wrap3-cms.conf
-    type: config
-    file_info:
-      mode: 0644

@@ -1,0 +1,33 @@
+# Apache setup of the W.R.A.P. 3 CMS, built by apt-package (apt-repo).
+# Enable with a2enconf wrap3-cms, then DirectoryIndex ... /wrap/wrap.php in the
+# sites using it.
+name: wrap3-cms-apache
+arch: all
+platform: linux
+version: ${VERSION}
+version_schema: semver
+section: web
+priority: optional
+maintainer: Magiiic <bagagiste@magiiic.com>
+description: W.R.A.P. 3 CMS served by Apache with PHP (transitional)
+homepage: https://github.com/magicoli/wrap3-cms
+license: AGPL-3.0-or-later
+
+depends:
+  - wrap3-cms (= ${DEB_VERSION})
+  - apache2
+  # The locked dependencies of the CMS need PHP 8.2+
+  - libapache2-mod-php (>= 2:8.2)
+# The config was part of wrap3-cms up to 3.5.1
+replaces:
+  - wrap3-cms (<< 3.5.2)
+deb:
+  breaks:
+    - wrap3-cms (<< 3.5.2)
+
+contents:
+  - src: packaging/wrap3-cms.apache.conf
+    dst: /etc/apache2/conf-available/wrap3-cms.conf
+    type: config
+    file_info:
+      mode: 0644

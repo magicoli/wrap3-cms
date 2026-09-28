@@ -1,0 +1,33 @@
+# Caddy setup of the W.R.A.P. 3 CMS, built by apt-package (apt-repo).
+# Import /etc/caddy/wrap3-cms.caddyfile in a site block with the site root, see
+# the file.
+name: wrap3-cms-caddy
+arch: all
+platform: linux
+version: ${VERSION}
+version_schema: semver
+section: web
+priority: optional
+maintainer: Magiiic <bagagiste@magiiic.com>
+description: W.R.A.P. 3 CMS served by Caddy with PHP-FPM (transitional)
+homepage: https://github.com/magicoli/wrap3-cms
+license: AGPL-3.0-or-later
+
+depends:
+  - wrap3-cms (= ${DEB_VERSION})
+  - caddy
+  # The locked dependencies of the CMS need PHP 8.2+
+  - php-fpm (>= 2:8.2)
+# The config was part of wrap3-cms up to 3.5.1
+replaces:
+  - wrap3-cms (<< 3.5.2)
+deb:
+  breaks:
+    - wrap3-cms (<< 3.5.2)
+
+contents:
+  - src: packaging/wrap3-cms.caddyfile
+    dst: /etc/caddy/wrap3-cms.caddyfile
+    type: config
+    file_info:
+      mode: 0644

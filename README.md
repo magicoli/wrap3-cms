@@ -30,17 +30,17 @@ It is poorly documented, and requires PHP 8.2 or later.
 
 ## Installation
 
-From the Magiiic apt repository, on a system with PHP 8.2 or later (Debian 12+, Ubuntu 24.04+):
+From the Magiiic apt repository, with the package matching your web server: `wrap3-cms-apache` (Apache with PHP) or `wrap3-cms-caddy` (Caddy with PHP-FPM). Both install the CMS itself (`wrap3-cms`) and PHP 8.2 or later (Debian 12+, Ubuntu 24.04+):
 
 ```bash
 curl -fsSL https://apt.magiiic.com/magiiic-packaging.asc | sudo gpg --dearmor -o /usr/share/keyrings/magiiic-packaging.gpg
 echo "deb [signed-by=/usr/share/keyrings/magiiic-packaging.gpg] https://apt.magiiic.com stable main" | sudo tee /etc/apt/sources.list.d/magiiic.list
-sudo apt update && sudo apt install wrap3-cms
+sudo apt update && sudo apt install wrap3-cms-apache    # or wrap3-cms-caddy
 ```
 
 The CMS is installed in `/usr/share/wrap3-cms`, and serves the folders of a site without an index file.
 
-With Apache, enable it at `/wrap/`:
+With Apache (`wrap3-cms-apache`), enable it at `/wrap/`:
 
 ```bash
 sudo a2enconf wrap3-cms && sudo systemctl reload apache2
@@ -52,7 +52,7 @@ Then, in the config of each site using it:
 DirectoryIndex index.html index.php /wrap/wrap.php
 ```
 
-With Caddy and PHP-FPM, import `/etc/caddy/wrap3-cms.caddyfile` in the site block, with the site root as argument:
+With Caddy (`wrap3-cms-caddy`), import `/etc/caddy/wrap3-cms.caddyfile` in the site block, with the site root as argument:
 
 ```
 example.com {
@@ -68,7 +68,7 @@ example.com {
 
 ### From source
 
-Put the clone outside your web directory: it contains unprotected scripts aimed to alter your disk content. Install the dependencies with `composer install --no-dev --working-dir=engine`, then set up Apache as in `packaging/wrap3-cms.apache.conf`, with the path of the clone.
+Put the clone outside your web directory: it contains unprotected scripts aimed to alter your disk content. Install the dependencies with `composer install --no-dev --working-dir=engine`, then set up the web server as in `packaging/wrap3-cms.apache.conf` or `packaging/wrap3-cms.caddyfile`, with the path of the clone.
 
 ## Known issues
 
