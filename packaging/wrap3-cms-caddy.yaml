@@ -1,6 +1,5 @@
-# Caddy setup of the W.R.A.P. 3 CMS, built by apt-package (apt-repo).
-# Import /etc/caddy/wrap3-cms.caddyfile in a site block with the site root, see
-# the file.
+# Caddy setup of the W.R.A.P. 3 CMS, built by apt-package (apt-repo): a
+# snippet, imported by a site block with the site root, and an example site.
 name: wrap3-cms-caddy
 arch: all
 platform: linux
@@ -26,8 +25,20 @@ deb:
     - wrap3-cms (<< 3.5.2)
 
 contents:
-  - src: packaging/wrap3-cms.caddyfile
-    dst: /etc/caddy/wrap3-cms.caddyfile
+  - src: packaging/wrap3-cms.snippet.caddyfile
+    dst: /etc/caddy/snippets/wrap3-cms.caddyfile
     type: config
     file_info:
       mode: 0644
+  # Not loaded as is (.example): copy it to a .caddyfile of the site
+  - src: packaging/wrap3-cms.site.caddyfile
+    dst: /etc/caddy/sites/wrap3-cms.caddyfile.example
+    type: config
+    file_info:
+      mode: 0644
+
+# Removes the former /etc/caddy/wrap3-cms.caddyfile (up to 3.5.3)
+scripts:
+  preinstall: packaging/wrap3-cms-caddy.maintscript
+  postinstall: packaging/wrap3-cms-caddy.maintscript
+  postremove: packaging/wrap3-cms-caddy.maintscript

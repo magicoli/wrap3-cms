@@ -40,24 +40,18 @@ sudo apt update && sudo apt install wrap3-cms-apache    # or wrap3-cms-caddy
 
 The CMS is installed in `/usr/share/wrap3-cms`, and serves the folders of a site without an index file.
 
-With Apache (`wrap3-cms-apache`), enable it at `/wrap/`:
+With Apache (`wrap3-cms-apache`), the CMS is served at `/wrap/` by the `wrap3-cms` conf, enabled on install. A site using it sets `DirectoryIndex index.html index.php /wrap/wrap.php`: adapt the example site `/etc/apache2/sites-available/wrap3-cms.conf` (domain, document root), then enable it:
 
 ```bash
-sudo a2enconf wrap3-cms && sudo systemctl reload apache2
+sudo a2ensite wrap3-cms && sudo systemctl reload apache2
 ```
 
-Then, in the config of each site using it:
-
-```
-DirectoryIndex index.html index.php /wrap/wrap.php
-```
-
-With Caddy (`wrap3-cms-caddy`), import `/etc/caddy/wrap3-cms.caddyfile` in the site block, with the site root as argument:
+With Caddy (`wrap3-cms-caddy`), the snippet `/etc/caddy/snippets/wrap3-cms.caddyfile` is imported by a site block, with the site root as argument. Copy the example site `/etc/caddy/sites/wrap3-cms.caddyfile.example` to a `.caddyfile` loaded by the main Caddyfile (e.g. with `import sites/*.caddyfile`), set the domain and site root, then reload Caddy:
 
 ```
 example.com {
     root * /var/www/example.com
-    import /etc/caddy/wrap3-cms.caddyfile /var/www/example.com
+    import /etc/caddy/snippets/wrap3-cms.caddyfile /var/www/example.com
     file_server
 }
 ```
@@ -68,7 +62,7 @@ example.com {
 
 ### From source
 
-Put the clone outside your web directory: it contains unprotected scripts aimed to alter your disk content. Install the dependencies with `composer install --no-dev --working-dir=engine`, then set up the web server as in `packaging/wrap3-cms.apache.conf` or `packaging/wrap3-cms.caddyfile`, with the path of the clone.
+Put the clone outside your web directory: it contains unprotected scripts aimed to alter your disk content. Install the dependencies with `composer install --no-dev --working-dir=engine`, then set up the web server as in `packaging/` (Apache conf and site, Caddy snippet and site), with the path of the clone.
 
 ## Known issues
 

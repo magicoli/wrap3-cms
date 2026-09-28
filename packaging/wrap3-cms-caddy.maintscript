@@ -1,0 +1,6 @@
+#!/bin/sh
+# Maintainer script of wrap3-cms-caddy (preinst, postinst, postrm): up to 3.5.3,
+# the snippet was /etc/caddy/wrap3-cms.caddyfile, now in /etc/caddy/snippets/.
+set -e
+
+dpkg-maintscript-helper rm_conffile /etc/caddy/wrap3-cms.caddyfile 3.5.4~ -- "$@"

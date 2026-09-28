@@ -1,0 +1,8 @@
+# Example site serving the W.R.A.P. 3 CMS (wrap3-cms-caddy package): copy it to
+# a .caddyfile imported by the main Caddyfile (e.g. with import sites/*.caddyfile),
+# with the real domain and site root.
+example.com {
+	root * /var/www/example.com
+	import /etc/caddy/snippets/wrap3-cms.caddyfile /var/www/example.com
+	file_server
+}

@@ -1,6 +1,6 @@
-# Apache setup of the W.R.A.P. 3 CMS, built by apt-package (apt-repo).
-# Enable with a2enconf wrap3-cms, then DirectoryIndex ... /wrap/wrap.php in the
-# sites using it.
+# Apache setup of the W.R.A.P. 3 CMS, built by apt-package (apt-repo): the
+# wrap3-cms conf serving the CMS at /wrap/, enabled on install, and an example
+# site (a2ensite wrap3-cms once adapted).
 name: wrap3-cms-apache
 arch: all
 platform: linux
@@ -31,3 +31,12 @@ contents:
     type: config
     file_info:
       mode: 0644
+  - src: packaging/wrap3-cms.site.apache.conf
+    dst: /etc/apache2/sites-available/wrap3-cms.conf
+    type: config
+    file_info:
+      mode: 0644
+
+scripts:
+  postinstall: packaging/wrap3-cms-apache.postinst
+  postremove: packaging/wrap3-cms-apache.postrm
