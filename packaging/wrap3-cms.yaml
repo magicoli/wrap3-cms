@@ -1,7 +1,7 @@
 # W.R.A.P. 3 CMS, built by apt-package (apt-repo) from build/wrap3-cms,
 # prepared by packaging/build. ${VERSION} comes from the git tag.
 # The web server setup is in its own package: wrap3-cms-apache or
-# wrap3-cms-caddy, which bring the matching PHP runtime (8.2+).
+# wrap3-cms-caddy, which bring the matching PHP runtime.
 name: wrap3-cms
 arch: all
 platform: linux
@@ -14,6 +14,10 @@ description: W.R.A.P. 3 CMS, media galleries published from folders (transitiona
 homepage: https://github.com/magicoli/wrap3-cms
 license: AGPL-3.0-or-later
 
+depends:
+  # The locked dependencies need PHP 8.2+, any runtime; php-cli when none is
+  # installed, which brings no web server
+  - php-cli (>= 2:8.2) | php-fpm (>= 2:8.2) | libapache2-mod-php (>= 2:8.2)
 suggests:
   - wrap3-cms-apache
   - wrap3-cms-caddy
